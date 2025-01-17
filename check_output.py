@@ -2,11 +2,11 @@ from tokenizers import Tokenizer, models, pre_tokenizers, decoders, trainers, pr
 
 # Define training parameters
 num_epochs = 100
-learning_rate = 1e-2
-max_grad_norm = 1.0  # Maximum norm for gradient clipping
+learning_rate = 1e-3
+max_grad_norm = 10  # Maximum norm for gradient clipping
 
 model_path = None
-#model_path = 'project/models/transformer_vae_v4_1.pth'
+model_path = 'project/models/transformer_vae.pth'
 # Define the alphabet for protein sequences
 protein_alphabet = "ACDEFGHIKLMNPQRSTVWY"
 
@@ -56,6 +56,7 @@ from sklearn.model_selection import train_test_split
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 from Bio import SeqIO
+from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
 BATCH_SIZE = 32
@@ -78,8 +79,6 @@ print(df.head())
 
 # Delete entries where df['Sequence'] is longer than max seq length
 df = df[df['Sequence'].str.len() <= seq_length-1]
-# Filter sequences longer than 20
-df = df[df['Sequence'].str.len() > 40]
 
 # Tokenize the sequences
 df['Tokenized Sequence'] = df['Sequence'].apply(lambda x: tokenizer.encode(x).tokens)
@@ -207,11 +206,11 @@ class TransformerVAE(nn.Module):
 
 # Define model parameters
 input_dim = len(vocab)
-model_dim = 64
+model_dim = 112
 num_heads = 4
 num_layers = 3
 output_dim = len(vocab)
-latent_dim = 12
+latent_dim = 24
 
 # Instantiate the model
 if model_path != None:
@@ -222,124 +221,8 @@ else:
 
 
 # Define loss function and optimizer
-# Define loss function and optimizer
-class FocalLoss(nn.Module):
-    def __init__(self, alpha=1, gamma=2, ignore_index=0):
-        super(FocalLoss, self).__init__()
-        self.alpha = alpha
-        self.gamma = gamma
-        self.ignore_index = ignore_index
-        self.ce_loss = nn.CrossEntropyLoss(ignore_index=ignore_index, reduction='none')
-
-    def forward(self, inputs, targets):
-        ce_loss = self.ce_loss(inputs, targets)
-        pt = torch.exp(-ce_loss)
-        focal_loss = self.alpha * (1 - pt) ** self.gamma * ce_loss
-        return focal_loss.mean()
-
-#criterion = FocalLoss(ignore_index=tokenizer.token_to_id("<pad>"))
 criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.token_to_id("<pad>"), reduction='mean')
 
-#optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
-
-val_losses = []
-train_losses = []
-# Training loop
-for epoch in range(num_epochs):
-    model.train()
-    total_loss = 0
-    loss_counter = 0
-    for nx, batch in enumerate(train_loader):
-
-        src = batch[0][:, :].to(device)
-        tgt = batch[0][:, :].to(device)
-        
-        
-        
-        # Gradually mask the source
-        for i in range(1, src.size(1)):
-            optimizer.zero_grad()
-            masked_src = src[:, :i] # source with tokens masked after position i
-            tgt = src[:, i] # we predict ith token (one after mask)
-            if tgt.eq(0).all():
-                #print("Target is all zeros, skipping this batch")
-                continue
-
-            #assert not torch.isnan(src).any(), "NaN values found in source data"
-            #assert not torch.isnan(tgt).any(), "NaN values found in target data"
-
-            output, mu, logvar = model(src, masked_src)
-            output = output + 1e-8
-            #assert not torch.isnan(output).any(), "NaN values found in output"
-
-            recon_loss = criterion(output.reshape(-1, output_dim), tgt.reshape(-1))
-            kld_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-            loss = recon_loss + 0.1*kld_loss
-            if torch.isnan(loss):
-                print("Loss is NaN")
-                print("Recon Loss:", recon_loss)
-                print("KLD Loss:", kld_loss)
-                raise ValueError("Loss is NaN")
-                
-            loss.backward()
-            
-            # Clip gradients
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_grad_norm)
-            
-            optimizer.step()
-            
-            total_loss += loss.item()
-            loss_counter += 1
-        print(f"Batch {nx} loss: {total_loss / loss_counter:.4f}")
-    
-    avg_loss = total_loss / loss_counter
-    train_losses.append(avg_loss)
-    print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")
-    
-    # Validation loop
-    model.eval()
-    val_loss = 0
-    val_loss_counter = 0
-    with torch.no_grad():
-        for batch in val_loader:
-            src = batch[0][:, :].to(device)
-            tgt = batch[0][:, :].to(device)
-            
-            for i in range(1, src.size(1)):
-                masked_src = src[:, :i]
-                tgt = src[:, i]
-                if tgt.eq(0).all():
-                    continue
-                
-                output_val, mu, logvar = model(src, masked_src)
-                
-                recon_loss = criterion(output_val.reshape(-1, output_dim), tgt.reshape(-1))
-                kld_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-                loss = recon_loss + kld_loss
-                
-                val_loss += loss.item()
-                val_loss_counter += 1
-
-    avg_val_loss = val_loss / val_loss_counter
-    val_losses.append(avg_val_loss)
-    print(f"Validation Loss: {avg_val_loss:.4f}")
-
-    torch.save(model, "project/models/transformer_vae.pth")
-
-#%% Save the model
-
-torch.save(model, "project/models/transformer_vae_1.pth")
-
-#%% # Visualize the losses
-import matplotlib.pyplot as plt
-
-plt.plot(train_losses, label="Training Loss")
-plt.plot(val_losses, label="Validation Loss")
-plt.xlabel("Epoch")
-plt.ylabel("Loss")
-plt.legend()
-plt.savefig('transformer_vae_loss.png')
 
 #%% Generate sequences
 #model = TransformerVAE(input_dim, model_dim, num_heads, num_layers, output_dim, latent_dim).to(device)
@@ -364,3 +247,26 @@ with torch.no_grad():
 
         print("Generated Sequence:", gen_seq[0])
         print("Actual Sequence:", src[0])
+
+        # Collect all latent vectors
+        latent_vectors = []
+        with torch.no_grad():
+            for batch in test_loader:
+                src = batch[0][:, :].to(device)
+                mu, logvar = model.encode(src)
+                z = model.reparameterize(mu, logvar)
+                latent_vectors.append(z.cpu().numpy())
+
+        latent_vectors = np.concatenate(latent_vectors, axis=0)
+
+        # Apply PCA to reduce the dimensionality of the latent space
+        pca = PCA(n_components=2)
+        latent_pca = pca.fit_transform(latent_vectors)
+
+        # Plot the latent space
+        plt.figure(figsize=(8, 6))
+        plt.scatter(latent_pca[:, 0], latent_pca[:, 1], alpha=0.5)
+        plt.xlabel('Principal Component 1')
+        plt.ylabel('Principal Component 2')
+        plt.title('PCA of Latent Space')
+        plt.show()
