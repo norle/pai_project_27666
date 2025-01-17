@@ -1,0 +1,170 @@
+Fri Jan 17 11:12:02 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100 80GB PCIe          On  |   00000000:65:00.0 Off |                   On |
+| N/A   34C    P0             65W /  300W |      88MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    5   0   0  |              25MiB / 19968MiB    | 28      0 |  2   0    1    0    0 |
+|                  |                 0MiB / 32767MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+
+
+['<s>', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', '<eos>']
+Vocabulary: {'<pad>': 0, 'V': 21, '<mask>': 1, 'Q': 17, 'F': 8, 'I': 11, 'Y': 23, 'G': 9, 'M': 14, 'N': 15, 'P': 16, 'A': 4, 'C': 5, 'H': 10, 'K': 12, 'L': 13, 'R': 18, 'S': 19, '<eos>': 2, 'D': 6, '<s>': 3, 'E': 7, 'T': 20, 'W': 22}
+Vocabulary size: 24
+                               ID                                           Sequence
+0  tr|A0A5P8N3Y8|A0A5P8N3Y8_9POAL  MAPTVMASSATSVAPFQGLKSTASLPVARRSTNGFGNVRTGGRIRC...
+1  tr|A0A5P8U3Q8|A0A5P8U3Q8_9ROSI  MASSILSSAAVASVNSASPAQASMVAPFTGLKSSAGFPITRKNNVD...
+2  tr|A0A5Q0EJT5|A0A5Q0EJT5_9GAMM  MSSFEVGDYQTAQTLETFGFLPKLTQDEVYDQIDYLIAQGWTPAIE...
+3  tr|A0A5Q4E8P1|A0A5Q4E8P1_9CYAN  MWVTTALLAFALRYLMSRWATAALWSGPTLVTTQESEVLAQIEQFL...
+4  tr|A0A5Q4EAI2|A0A5Q4EAI2_9CYAN  MAIRTPAVSPPQQWSSASAVATAQGQGQVLVESGVSLAVGAVVQAD...
+Train dataset size: 2007
+Validation dataset size: 251
+Test dataset size: 251
+Batch 0 loss: 3.4573
+Batch 1 loss: 3.2415
+Batch 2 loss: 3.1577
+Batch 3 loss: 3.1194
+Batch 4 loss: 3.0995
+Batch 5 loss: 3.0821
+Batch 6 loss: 3.0697
+Batch 7 loss: 3.0605
+Batch 8 loss: 3.0535
+Batch 9 loss: 3.0470
+Batch 10 loss: 3.0419
+Batch 11 loss: 3.0370
+Batch 12 loss: 3.0335
+Batch 13 loss: 3.0301
+Batch 14 loss: 3.0274
+Batch 15 loss: 3.0247
+Batch 16 loss: 3.0233
+Batch 17 loss: 3.0215
+Batch 18 loss: 3.0200
+Batch 19 loss: 3.0181
+Batch 20 loss: 3.0168
+Batch 21 loss: 3.0153
+Batch 22 loss: 3.0142
+Batch 23 loss: 3.0127
+Batch 24 loss: 3.0117
+Batch 25 loss: 3.0107
+Batch 26 loss: 3.0101
+Batch 27 loss: 3.0093
+Batch 28 loss: 3.0088
+Batch 29 loss: 3.0082
+Batch 30 loss: 3.0079
+Batch 31 loss: 3.0074
+Batch 32 loss: 3.0070
+Batch 33 loss: 3.0062
+Batch 34 loss: 3.0055
+Batch 35 loss: 3.0050
+Batch 36 loss: 3.0047
+Batch 37 loss: 3.0039
+Batch 38 loss: 3.0035
+Batch 39 loss: 3.0029
+Batch 40 loss: 3.0023
+Batch 41 loss: 3.0020
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 23781097: <transf_vae_4> in cluster <dcc> Exited
+
+Job <transf_vae_4> was submitted from host <hpclogin1> by user <s233201> in cluster <dcc> at Fri Jan 17 11:11:50 2025
+Job was executed on host(s) <4*n-62-18-12>, in queue <c27666>, as user <s233201> in cluster <dcc> at Fri Jan 17 11:12:00 2025
+</zhome/85/8/203063> was used as the home directory.
+</zhome/85/8/203063/pai_course> was used as the working directory.
+Started at Fri Jan 17 11:12:00 2025
+Terminated at Fri Jan 17 11:17:32 2025
+Results reported at Fri Jan 17 11:17:32 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q c27666 
+### -- set the job Name --
+#BSUB -J transf_vae_4
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 8:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=16GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start --
+##BSUB -B
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o project/out/gpu_%J.out
+#BSUB -e project/out/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+module load cuda/11.6
+
+source pai/bin/activate
+
+python -u project/transf_vae_v4.py 
+
+
+
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   324.91 sec.
+    Max Memory :                                 1092 MB
+    Average Memory :                             867.00 MB
+    Total Requested Memory :                     65536.00 MB
+    Delta Memory :                               64444.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                13
+    Run time :                                   332 sec.
+    Turnaround time :                            342 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <project/out/gpu_23781097.err> for stderr output of this job.
+

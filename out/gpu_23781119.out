@@ -1,0 +1,763 @@
+Fri Jan 17 11:17:34 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100 80GB PCIe          On  |   00000000:CA:00.0 Off |                   On |
+| N/A   32C    P0             62W /  300W |      88MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    5   0   0  |              25MiB / 19968MiB    | 28      0 |  2   0    1    0    0 |
+|                  |                 0MiB / 32767MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+
+
+['<s>', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', '<eos>']
+Vocabulary: {'G': 9, 'I': 11, 'K': 12, 'R': 18, 'T': 20, 'C': 5, 'Q': 17, 'F': 8, 'N': 15, 'L': 13, 'W': 22, 'Y': 23, 'S': 19, 'V': 21, '<mask>': 1, 'M': 14, 'P': 16, 'A': 4, '<s>': 3, 'D': 6, 'E': 7, '<pad>': 0, '<eos>': 2, 'H': 10}
+Vocabulary size: 24
+                               ID                                           Sequence
+0  tr|A0A5P8N3Y8|A0A5P8N3Y8_9POAL  MAPTVMASSATSVAPFQGLKSTASLPVARRSTNGFGNVRTGGRIRC...
+1  tr|A0A5P8U3Q8|A0A5P8U3Q8_9ROSI  MASSILSSAAVASVNSASPAQASMVAPFTGLKSSAGFPITRKNNVD...
+2  tr|A0A5Q0EJT5|A0A5Q0EJT5_9GAMM  MSSFEVGDYQTAQTLETFGFLPKLTQDEVYDQIDYLIAQGWTPAIE...
+3  tr|A0A5Q4E8P1|A0A5Q4E8P1_9CYAN  MWVTTALLAFALRYLMSRWATAALWSGPTLVTTQESEVLAQIEQFL...
+4  tr|A0A5Q4EAI2|A0A5Q4EAI2_9CYAN  MAIRTPAVSPPQQWSSASAVATAQGQGQVLVESGVSLAVGAVVQAD...
+Train dataset size: 2007
+Validation dataset size: 251
+Test dataset size: 251
+Batch 0 loss: 3.1994
+Batch 1 loss: 3.0950
+Batch 2 loss: 3.0443
+Batch 3 loss: 3.0140
+Batch 4 loss: 2.9744
+Batch 5 loss: 2.9557
+Batch 6 loss: 2.9333
+Batch 7 loss: 2.9102
+Batch 8 loss: 2.8960
+Batch 9 loss: 2.8687
+Batch 10 loss: 2.8495
+Batch 11 loss: 2.8368
+Batch 12 loss: 2.8271
+Batch 13 loss: 2.8173
+Batch 14 loss: 2.8081
+Batch 15 loss: 2.7973
+Batch 16 loss: 2.7773
+Batch 17 loss: 2.7702
+Batch 18 loss: 2.7639
+Batch 19 loss: 2.7624
+Batch 20 loss: 2.7531
+Batch 21 loss: 2.7374
+Batch 22 loss: 2.7261
+Batch 23 loss: 2.7166
+Batch 24 loss: 2.7074
+Batch 25 loss: 2.6967
+Batch 26 loss: 2.6901
+Batch 27 loss: 2.6787
+Batch 28 loss: 2.6692
+Batch 29 loss: 2.6622
+Batch 30 loss: 2.6523
+Batch 31 loss: 2.6383
+Batch 32 loss: 2.6308
+Batch 33 loss: 2.6269
+Batch 34 loss: 2.6171
+Batch 35 loss: 2.6037
+Batch 36 loss: 2.5958
+Batch 37 loss: 2.5934
+Batch 38 loss: 2.5913
+Batch 39 loss: 2.5841
+Batch 40 loss: 2.5779
+Batch 41 loss: 2.5696
+Batch 42 loss: 2.5680
+Batch 43 loss: 2.5629
+Batch 44 loss: 2.5572
+Batch 45 loss: 2.5534
+Batch 46 loss: 2.5532
+Batch 47 loss: 2.5445
+Batch 48 loss: 2.5365
+Batch 49 loss: 2.5346
+Batch 50 loss: 2.5334
+Batch 51 loss: 2.5279
+Batch 52 loss: 2.5250
+Batch 53 loss: 2.5203
+Batch 54 loss: 2.5143
+Batch 55 loss: 2.5056
+Batch 56 loss: 2.5026
+Batch 57 loss: 2.4983
+Batch 58 loss: 2.4980
+Batch 59 loss: 2.4963
+Batch 60 loss: 2.4927
+Batch 61 loss: 2.4893
+Batch 62 loss: 2.4878
+Epoch [1/100], Loss: 2.4878
+Validation Loss: 2.4848
+Batch 0 loss: 2.1953
+Batch 1 loss: 2.1737
+Batch 2 loss: 2.2134
+Batch 3 loss: 2.1804
+Batch 4 loss: 2.1431
+Batch 5 loss: 2.1375
+Batch 6 loss: 2.1407
+Batch 7 loss: 2.1551
+Batch 8 loss: 2.1866
+Batch 9 loss: 2.2016
+Batch 10 loss: 2.2108
+Batch 11 loss: 2.2100
+Batch 12 loss: 2.2255
+Batch 13 loss: 2.2204
+Batch 14 loss: 2.2293
+Batch 15 loss: 2.2202
+Batch 16 loss: 2.2182
+Batch 17 loss: 2.2189
+Batch 18 loss: 2.2151
+Batch 19 loss: 2.2046
+Batch 20 loss: 2.2023
+Batch 21 loss: 2.1925
+Batch 22 loss: 2.1975
+Batch 23 loss: 2.1920
+Batch 24 loss: 2.1912
+Batch 25 loss: 2.1945
+Batch 26 loss: 2.1985
+Batch 27 loss: 2.1963
+Batch 28 loss: 2.2009
+Batch 29 loss: 2.2017
+Batch 30 loss: 2.2072
+Batch 31 loss: 2.2030
+Batch 32 loss: 2.2041
+Batch 33 loss: 2.2050
+Batch 34 loss: 2.2111
+Batch 35 loss: 2.2077
+Batch 36 loss: 2.2034
+Batch 37 loss: 2.2027
+Batch 38 loss: 2.1955
+Batch 39 loss: 2.2002
+Batch 40 loss: 2.1975
+Batch 41 loss: 2.1990
+Batch 42 loss: 2.1995
+Batch 43 loss: 2.2016
+Batch 44 loss: 2.2041
+Batch 45 loss: 2.2035
+Batch 46 loss: 2.1999
+Batch 47 loss: 2.2045
+Batch 48 loss: 2.2016
+Batch 49 loss: 2.2002
+Batch 50 loss: 2.1989
+Batch 51 loss: 2.1937
+Batch 52 loss: 2.1930
+Batch 53 loss: 2.1931
+Batch 54 loss: 2.1961
+Batch 55 loss: 2.1952
+Batch 56 loss: 2.1968
+Batch 57 loss: 2.1947
+Batch 58 loss: 2.1943
+Batch 59 loss: 2.1905
+Batch 60 loss: 2.1908
+Batch 61 loss: 2.1909
+Batch 62 loss: 2.1872
+Epoch [2/100], Loss: 2.1872
+Validation Loss: 2.2491
+Batch 0 loss: 2.0455
+Batch 1 loss: 1.9883
+Batch 2 loss: 2.0369
+Batch 3 loss: 2.0368
+Batch 4 loss: 2.0426
+Batch 5 loss: 2.0312
+Batch 6 loss: 2.0732
+Batch 7 loss: 2.0837
+Batch 8 loss: 2.0833
+Batch 9 loss: 2.0845
+Batch 10 loss: 2.0763
+Batch 11 loss: 2.0806
+Batch 12 loss: 2.0716
+Batch 13 loss: 2.0586
+Batch 14 loss: 2.0584
+Batch 15 loss: 2.0693
+Batch 16 loss: 2.0838
+Batch 17 loss: 2.0914
+Batch 18 loss: 2.0889
+Batch 19 loss: 2.0735
+Batch 20 loss: 2.0708
+Batch 21 loss: 2.0750
+Batch 22 loss: 2.0850
+Batch 23 loss: 2.0971
+Batch 24 loss: 2.1058
+Batch 25 loss: 2.1074
+Batch 26 loss: 2.1109
+Batch 27 loss: 2.0973
+Batch 28 loss: 2.0972
+Batch 29 loss: 2.1012
+Batch 30 loss: 2.1033
+Batch 31 loss: 2.1068
+Batch 32 loss: 2.1067
+Batch 33 loss: 2.1070
+Batch 34 loss: 2.1073
+Batch 35 loss: 2.1085
+Batch 36 loss: 2.1143
+Batch 37 loss: 2.1111
+Batch 38 loss: 2.1110
+Batch 39 loss: 2.1114
+Batch 40 loss: 2.1141
+Batch 41 loss: 2.1139
+Batch 42 loss: 2.1141
+Batch 43 loss: 2.1126
+Batch 44 loss: 2.1119
+Batch 45 loss: 2.1124
+Batch 46 loss: 2.1090
+Batch 47 loss: 2.1109
+Batch 48 loss: 2.1076
+Batch 49 loss: 2.1101
+Batch 50 loss: 2.1077
+Batch 51 loss: 2.1070
+Batch 52 loss: 2.1076
+Batch 53 loss: 2.1096
+Batch 54 loss: 2.1097
+Batch 55 loss: 2.1057
+Batch 56 loss: 2.1059
+Batch 57 loss: 2.1068
+Batch 58 loss: 2.1057
+Batch 59 loss: 2.1033
+Batch 60 loss: 2.1056
+Batch 61 loss: 2.1070
+Batch 62 loss: 2.1087
+Epoch [3/100], Loss: 2.1087
+Validation Loss: 2.1955
+Batch 0 loss: 1.6036
+Batch 1 loss: 1.8703
+Batch 2 loss: 1.9780
+Batch 3 loss: 1.9924
+Batch 4 loss: 1.9926
+Batch 5 loss: 1.9980
+Batch 6 loss: 2.0164
+Batch 7 loss: 1.9989
+Batch 8 loss: 2.0126
+Batch 9 loss: 2.0248
+Batch 10 loss: 2.0148
+Batch 11 loss: 2.0259
+Batch 12 loss: 2.0412
+Batch 13 loss: 2.0463
+Batch 14 loss: 2.0663
+Batch 15 loss: 2.0651
+Batch 16 loss: 2.0580
+Batch 17 loss: 2.0510
+Batch 18 loss: 2.0498
+Batch 19 loss: 2.0506
+Batch 20 loss: 2.0489
+Batch 21 loss: 2.0500
+Batch 22 loss: 2.0595
+Batch 23 loss: 2.0596
+Batch 24 loss: 2.0642
+Batch 25 loss: 2.0585
+Batch 26 loss: 2.0583
+Batch 27 loss: 2.0588
+Batch 28 loss: 2.0534
+Batch 29 loss: 2.0571
+Batch 30 loss: 2.0518
+Batch 31 loss: 2.0481
+Batch 32 loss: 2.0468
+Batch 33 loss: 2.0466
+Batch 34 loss: 2.0476
+Batch 35 loss: 2.0480
+Batch 36 loss: 2.0515
+Batch 37 loss: 2.0465
+Batch 38 loss: 2.0481
+Batch 39 loss: 2.0516
+Batch 40 loss: 2.0579
+Batch 41 loss: 2.0618
+Batch 42 loss: 2.0610
+Batch 43 loss: 2.0624
+Batch 44 loss: 2.0623
+Batch 45 loss: 2.0632
+Batch 46 loss: 2.0616
+Batch 47 loss: 2.0640
+Batch 48 loss: 2.0636
+Batch 49 loss: 2.0648
+Batch 50 loss: 2.0621
+Batch 51 loss: 2.0613
+Batch 52 loss: 2.0663
+Batch 53 loss: 2.0705
+Batch 54 loss: 2.0656
+Batch 55 loss: 2.0685
+Batch 56 loss: 2.0657
+Batch 57 loss: 2.0639
+Batch 58 loss: 2.0651
+Batch 59 loss: 2.0642
+Batch 60 loss: 2.0665
+Batch 61 loss: 2.0694
+Batch 62 loss: 2.0681
+Epoch [4/100], Loss: 2.0681
+Validation Loss: 2.1683
+Batch 0 loss: 2.2072
+Batch 1 loss: 2.0708
+Batch 2 loss: 2.0332
+Batch 3 loss: 2.0810
+Batch 4 loss: 2.0390
+Batch 5 loss: 2.0618
+Batch 6 loss: 2.0608
+Batch 7 loss: 2.0672
+Batch 8 loss: 2.0754
+Batch 9 loss: 2.0697
+Batch 10 loss: 2.0621
+Batch 11 loss: 2.0556
+Batch 12 loss: 2.0444
+Batch 13 loss: 2.0198
+Batch 14 loss: 2.0211
+Batch 15 loss: 2.0323
+Batch 16 loss: 2.0235
+Batch 17 loss: 2.0210
+Batch 18 loss: 2.0253
+Batch 19 loss: 2.0242
+Batch 20 loss: 2.0243
+Batch 21 loss: 2.0228
+Batch 22 loss: 2.0202
+Batch 23 loss: 2.0171
+Batch 24 loss: 2.0136
+Batch 25 loss: 2.0172
+Batch 26 loss: 2.0119
+Batch 27 loss: 2.0207
+Batch 28 loss: 2.0158
+Batch 29 loss: 2.0135
+Batch 30 loss: 2.0196
+Batch 31 loss: 2.0194
+Batch 32 loss: 2.0281
+Batch 33 loss: 2.0255
+Batch 34 loss: 2.0286
+Batch 35 loss: 2.0238
+Batch 36 loss: 2.0288
+Batch 37 loss: 2.0247
+Batch 38 loss: 2.0266
+Batch 39 loss: 2.0296
+Batch 40 loss: 2.0368
+Batch 41 loss: 2.0377
+Batch 42 loss: 2.0382
+Batch 43 loss: 2.0377
+Batch 44 loss: 2.0399
+Batch 45 loss: 2.0403
+Batch 46 loss: 2.0397
+Batch 47 loss: 2.0368
+Batch 48 loss: 2.0338
+Batch 49 loss: 2.0332
+Batch 50 loss: 2.0389
+Batch 51 loss: 2.0377
+Batch 52 loss: 2.0409
+Batch 53 loss: 2.0382
+Batch 54 loss: 2.0365
+Batch 55 loss: 2.0364
+Batch 56 loss: 2.0411
+Batch 57 loss: 2.0394
+Batch 58 loss: 2.0434
+Batch 59 loss: 2.0432
+Batch 60 loss: 2.0417
+Batch 61 loss: 2.0405
+Batch 62 loss: 2.0389
+Epoch [5/100], Loss: 2.0389
+Validation Loss: 2.1249
+Batch 0 loss: 1.9052
+Batch 1 loss: 1.8210
+Batch 2 loss: 1.8261
+Batch 3 loss: 1.8635
+Batch 4 loss: 1.8652
+Batch 5 loss: 1.8724
+Batch 6 loss: 1.8577
+Batch 7 loss: 1.8637
+Batch 8 loss: 1.8702
+Batch 9 loss: 1.8934
+Batch 10 loss: 1.9033
+Batch 11 loss: 1.9257
+Batch 12 loss: 1.9200
+Batch 13 loss: 1.9109
+Batch 14 loss: 1.9033
+Batch 15 loss: 1.9048
+Batch 16 loss: 1.9073
+Batch 17 loss: 1.9174
+Batch 18 loss: 1.9091
+Batch 19 loss: 1.9052
+Batch 20 loss: 1.8965
+Batch 21 loss: 1.9071
+Batch 22 loss: 1.9063
+Batch 23 loss: 1.9056
+Batch 24 loss: 1.9238
+Batch 25 loss: 1.9233
+Batch 26 loss: 1.9296
+Batch 27 loss: 1.9342
+Batch 28 loss: 1.9371
+Batch 29 loss: 1.9412
+Batch 30 loss: 1.9458
+Batch 31 loss: 1.9372
+Batch 32 loss: 1.9484
+Batch 33 loss: 1.9519
+Batch 34 loss: 1.9586
+Batch 35 loss: 1.9631
+Batch 36 loss: 1.9680
+Batch 37 loss: 1.9661
+Batch 38 loss: 1.9713
+Batch 39 loss: 1.9710
+Batch 40 loss: 1.9809
+Batch 41 loss: 1.9856
+Batch 42 loss: 1.9883
+Batch 43 loss: 1.9903
+Batch 44 loss: 1.9879
+Batch 45 loss: 1.9916
+Batch 46 loss: 1.9951
+Batch 47 loss: 1.9952
+Batch 48 loss: 1.9939
+Batch 49 loss: 1.9967
+Batch 50 loss: 1.9963
+Batch 51 loss: 1.9970
+Batch 52 loss: 2.0009
+Batch 53 loss: 2.0011
+Batch 54 loss: 2.0013
+Batch 55 loss: 2.0034
+Batch 56 loss: 2.0070
+Batch 57 loss: 2.0100
+Batch 58 loss: 2.0122
+Batch 59 loss: 2.0140
+Batch 60 loss: 2.0172
+Batch 61 loss: 2.0168
+Batch 62 loss: 2.0140
+Epoch [6/100], Loss: 2.0140
+Validation Loss: 2.1409
+Batch 0 loss: 1.9213
+Batch 1 loss: 1.8653
+Batch 2 loss: 1.8487
+Batch 3 loss: 1.8204
+Batch 4 loss: 1.8147
+Batch 5 loss: 1.8318
+Batch 6 loss: 1.8455
+Batch 7 loss: 1.8454
+Batch 8 loss: 1.8367
+Batch 9 loss: 1.8252
+Batch 10 loss: 1.8640
+Batch 11 loss: 1.8632
+Batch 12 loss: 1.8839
+Batch 13 loss: 1.8915
+Batch 14 loss: 1.8956
+Batch 15 loss: 1.9193
+Batch 16 loss: 1.9208
+Batch 17 loss: 1.9180
+Batch 18 loss: 1.9245
+Batch 19 loss: 1.9283
+Batch 20 loss: 1.9364
+Batch 21 loss: 1.9385
+Batch 22 loss: 1.9428
+Batch 23 loss: 1.9477
+Batch 24 loss: 1.9478
+Batch 25 loss: 1.9573
+Batch 26 loss: 1.9699
+Batch 27 loss: 1.9718
+Batch 28 loss: 1.9722
+Batch 29 loss: 1.9709
+Batch 30 loss: 1.9685
+Batch 31 loss: 1.9763
+Batch 32 loss: 1.9766
+Batch 33 loss: 1.9772
+Batch 34 loss: 1.9814
+Batch 35 loss: 1.9854
+Batch 36 loss: 1.9895
+Batch 37 loss: 1.9897
+Batch 38 loss: 1.9890
+Batch 39 loss: 1.9893
+Batch 40 loss: 1.9905
+Batch 41 loss: 1.9904
+Batch 42 loss: 1.9923
+Batch 43 loss: 1.9963
+Batch 44 loss: 1.9994
+Batch 45 loss: 2.0009
+Batch 46 loss: 1.9950
+Batch 47 loss: 1.9972
+Batch 48 loss: 1.9946
+Batch 49 loss: 1.9958
+Batch 50 loss: 1.9946
+Batch 51 loss: 1.9951
+Batch 52 loss: 1.9974
+Batch 53 loss: 1.9968
+Batch 54 loss: 1.9929
+Batch 55 loss: 1.9926
+Batch 56 loss: 1.9907
+Batch 57 loss: 1.9911
+Batch 58 loss: 1.9931
+Batch 59 loss: 1.9974
+Batch 60 loss: 1.9978
+Batch 61 loss: 1.9983
+Batch 62 loss: 1.9967
+Epoch [7/100], Loss: 1.9967
+Validation Loss: 2.1166
+Batch 0 loss: 1.9305
+Batch 1 loss: 1.8999
+Batch 2 loss: 1.9340
+Batch 3 loss: 1.9714
+Batch 4 loss: 1.9955
+Batch 5 loss: 1.9920
+Batch 6 loss: 1.9574
+Batch 7 loss: 1.9694
+Batch 8 loss: 1.9932
+Batch 9 loss: 1.9770
+Batch 10 loss: 1.9651
+Batch 11 loss: 1.9640
+Batch 12 loss: 1.9581
+Batch 13 loss: 1.9585
+Batch 14 loss: 1.9694
+Batch 15 loss: 1.9594
+Batch 16 loss: 1.9580
+Batch 17 loss: 1.9591
+Batch 18 loss: 1.9628
+Batch 19 loss: 1.9580
+Batch 20 loss: 1.9597
+Batch 21 loss: 1.9544
+Batch 22 loss: 1.9551
+Batch 23 loss: 1.9494
+Batch 24 loss: 1.9440
+Batch 25 loss: 1.9519
+Batch 26 loss: 1.9563
+Batch 27 loss: 1.9589
+Batch 28 loss: 1.9606
+Batch 29 loss: 1.9698
+Batch 30 loss: 1.9592
+Batch 31 loss: 1.9618
+Batch 32 loss: 1.9660
+Batch 33 loss: 1.9581
+Batch 34 loss: 1.9553
+Batch 35 loss: 1.9570
+Batch 36 loss: 1.9526
+Batch 37 loss: 1.9553
+Batch 38 loss: 1.9618
+Batch 39 loss: 1.9627
+Batch 40 loss: 1.9623
+Batch 41 loss: 1.9586
+Batch 42 loss: 1.9624
+Batch 43 loss: 1.9667
+Batch 44 loss: 1.9711
+Batch 45 loss: 1.9705
+Batch 46 loss: 1.9750
+Batch 47 loss: 1.9803
+Batch 48 loss: 1.9794
+Batch 49 loss: 1.9804
+Batch 50 loss: 1.9815
+Batch 51 loss: 1.9820
+Batch 52 loss: 1.9833
+Batch 53 loss: 1.9817
+Batch 54 loss: 1.9810
+Batch 55 loss: 1.9765
+Batch 56 loss: 1.9830
+Batch 57 loss: 1.9825
+Batch 58 loss: 1.9820
+Batch 59 loss: 1.9830
+Batch 60 loss: 1.9815
+Batch 61 loss: 1.9825
+Batch 62 loss: 1.9823
+Epoch [8/100], Loss: 1.9823
+Validation Loss: 2.1419
+Batch 0 loss: 1.9258
+Batch 1 loss: 1.9268
+Batch 2 loss: 1.9893
+Batch 3 loss: 1.9810
+Batch 4 loss: 1.9712
+Batch 5 loss: 1.9958
+Batch 6 loss: 1.9933
+Batch 7 loss: 2.0063
+Batch 8 loss: 2.0067
+Batch 9 loss: 1.9965
+Batch 10 loss: 1.9979
+Batch 11 loss: 1.9957
+Batch 12 loss: 1.9985
+Batch 13 loss: 1.9898
+Batch 14 loss: 1.9799
+Batch 15 loss: 1.9744
+Batch 16 loss: 1.9675
+Batch 17 loss: 1.9684
+Batch 18 loss: 1.9628
+Batch 19 loss: 1.9722
+Batch 20 loss: 1.9687
+Batch 21 loss: 1.9713
+Batch 22 loss: 1.9676
+Batch 23 loss: 1.9719
+Batch 24 loss: 1.9753
+Batch 25 loss: 1.9817
+Batch 26 loss: 1.9792
+Batch 27 loss: 1.9819
+Batch 28 loss: 1.9873
+Batch 29 loss: 1.9829
+Batch 30 loss: 1.9790
+Batch 31 loss: 1.9742
+Batch 32 loss: 1.9702
+Batch 33 loss: 1.9665
+Batch 34 loss: 1.9697
+Batch 35 loss: 1.9701
+Batch 36 loss: 1.9753
+Batch 37 loss: 1.9763
+Batch 38 loss: 1.9798
+Batch 39 loss: 1.9869
+Batch 40 loss: 1.9876
+Batch 41 loss: 1.9891
+Batch 42 loss: 1.9844
+Batch 43 loss: 1.9827
+Batch 44 loss: 1.9842
+Batch 45 loss: 1.9853
+Batch 46 loss: 1.9827
+Batch 47 loss: 1.9791
+Batch 48 loss: 1.9745
+Batch 49 loss: 1.9742
+Batch 50 loss: 1.9739
+Batch 51 loss: 1.9736
+Batch 52 loss: 1.9673
+Batch 53 loss: 1.9666
+Batch 54 loss: 1.9649
+Batch 55 loss: 1.9652
+Batch 56 loss: 1.9642
+Batch 57 loss: 1.9628
+Batch 58 loss: 1.9618
+Batch 59 loss: 1.9681
+Batch 60 loss: 1.9711
+Batch 61 loss: 1.9732
+Batch 62 loss: 1.9731
+Epoch [9/100], Loss: 1.9731
+Validation Loss: 2.0898
+Batch 0 loss: 2.0021
+Batch 1 loss: 1.9675
+Batch 2 loss: 1.9561
+Batch 3 loss: 1.9982
+Batch 4 loss: 1.9900
+Batch 5 loss: 1.9985
+Batch 6 loss: 1.9826
+Batch 7 loss: 1.9937
+Batch 8 loss: 1.9820
+Batch 9 loss: 1.9523
+Batch 10 loss: 1.9500
+Batch 11 loss: 1.9355
+Batch 12 loss: 1.9337
+Batch 13 loss: 1.9400
+Batch 14 loss: 1.9400
+Batch 15 loss: 1.9436
+Batch 16 loss: 1.9536
+Batch 17 loss: 1.9587
+Batch 18 loss: 1.9570
+Batch 19 loss: 1.9536
+Batch 20 loss: 1.9525
+Batch 21 loss: 1.9510
+Batch 22 loss: 1.9422
+Batch 23 loss: 1.9477
+Batch 24 loss: 1.9375
+Batch 25 loss: 1.9377
+Batch 26 loss: 1.9401
+Batch 27 loss: 1.9385
+Batch 28 loss: 1.9415
+Batch 29 loss: 1.9366
+Batch 30 loss: 1.9417
+Batch 31 loss: 1.9359
+Batch 32 loss: 1.9405
+Batch 33 loss: 1.9476
+Batch 34 loss: 1.9498
+Batch 35 loss: 1.9518
+Batch 36 loss: 1.9582
+Batch 37 loss: 1.9604
+Batch 38 loss: 1.9617
+Batch 39 loss: 1.9649
+Batch 40 loss: 1.9566
+Batch 41 loss: 1.9587
+Batch 42 loss: 1.9568
+Batch 43 loss: 1.9587
+Batch 44 loss: 1.9648
+Batch 45 loss: 1.9639
+Batch 46 loss: 1.9673
+Batch 47 loss: 1.9651
+Batch 48 loss: 1.9559
+Batch 49 loss: 1.9569
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 23781119: <transf_vae_4> in cluster <dcc> Exited
+
+Job <transf_vae_4> was submitted from host <hpclogin1> by user <s233201> in cluster <dcc> at Fri Jan 17 11:17:22 2025
+Job was executed on host(s) <4*n-62-18-12>, in queue <c27666>, as user <s233201> in cluster <dcc> at Fri Jan 17 11:17:32 2025
+</zhome/85/8/203063> was used as the home directory.
+</zhome/85/8/203063/pai_course> was used as the working directory.
+Started at Fri Jan 17 11:17:32 2025
+Terminated at Fri Jan 17 12:35:04 2025
+Results reported at Fri Jan 17 12:35:04 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q c27666 
+### -- set the job Name --
+#BSUB -J transf_vae_4
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 8:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=16GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start --
+##BSUB -B
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o project/out/gpu_%J.out
+#BSUB -e project/out/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+module load cuda/11.6
+
+source pai/bin/activate
+
+python -u project/transf_vae_v4.py 
+
+
+
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   4637.96 sec.
+    Max Memory :                                 1103 MB
+    Average Memory :                             1068.13 MB
+    Total Requested Memory :                     65536.00 MB
+    Delta Memory :                               64433.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                13
+    Run time :                                   4652 sec.
+    Turnaround time :                            4662 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <project/out/gpu_23781119.err> for stderr output of this job.
+

@@ -1,0 +1,37 @@
+Loaded module: cuda/11.6
+/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py:379: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Traceback (most recent call last):
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v4.py", line 247, in <module>
+    output, mu, logvar = model(src, masked_src)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v4.py", line 199, in forward
+    mu, logvar = self.encode(src)
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v4.py", line 162, in encode
+    memory = self.encoder(src)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 511, in forward
+    output = mod(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 904, in forward
+    + self._sa_block(x, src_mask, src_key_padding_mask, is_causal=is_causal)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 918, in _sa_block
+    x = self.self_attn(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/activation.py", line 1368, in forward
+    attn_output, attn_output_weights = F.multi_head_attention_forward(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/functional.py", line 6176, in multi_head_attention_forward
+    v = v.view(v.shape[0], bsz * num_heads, head_dim).transpose(0, 1)
+KeyboardInterrupt
