@@ -8,6 +8,8 @@ max_grad_norm = 1.0  # Maximum norm for gradient clipping
 model_path = None
 #model_path = 'project/models/transformer_vae_v4_1.pth'
 # Define the alphabet for protein sequences
+
+data_path = "project/data/large_subunit_filtered.fasta"
 protein_alphabet = "ACDEFGHIKLMNPQRSTVWY"
 
 # Create a tokenizer with a BPE model
@@ -21,7 +23,7 @@ tokenizer.decoder = decoders.ByteLevel()
 
 # Define a trainer with the protein alphabet
 trainer = trainers.BpeTrainer(
-    vocab_size=len(protein_alphabet) + 3,  # +3 for <pad>, <eos>, and <s>
+    vocab_size=len(protein_alphabet) + 4,  # +3 for <pad>, <eos>, and <s>
     special_tokens=["<pad>", "<mask>", "<eos>", "<s>"],
     initial_alphabet=list(protein_alphabet)
 )
@@ -56,11 +58,12 @@ from sklearn.model_selection import train_test_split
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 from Bio import SeqIO
+import math
 import matplotlib.pyplot as plt
 
 BATCH_SIZE = 32
 
-seq_length = 200
+seq_length = 500
 
 # Read a fasta file into a dataframe
 def read_fasta_to_df(fasta_file):
@@ -72,14 +75,14 @@ def read_fasta_to_df(fasta_file):
 
 
 # Example usage
-fasta_file = "project/data/clustered90_seq_rep_seq.fasta"
+fasta_file = data_path
 df = read_fasta_to_df(fasta_file)
 print(df.head())
 
 # Delete entries where df['Sequence'] is longer than max seq length
 df = df[df['Sequence'].str.len() <= seq_length-1]
 # Filter sequences longer than 20
-df = df[df['Sequence'].str.len() > 40]
+#df = df[df['Sequence'].str.len() > 40]
 
 # Tokenize the sequences
 df['Tokenized Sequence'] = df['Sequence'].apply(lambda x: tokenizer.encode(x).tokens)
@@ -135,7 +138,6 @@ class TransformerVAE(nn.Module):
     def __init__(self, input_dim, model_dim, num_heads, num_layers, output_dim, latent_dim, dropout=0):
         super(TransformerVAE, self).__init__()
         self.embedding = nn.Embedding(input_dim, model_dim)
-        self.pos_encoder = nn.Embedding(seq_length, model_dim)
         
         encoder_layer = nn.TransformerEncoderLayer(d_model=model_dim, nhead=num_heads, dropout=dropout)
         self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
@@ -152,15 +154,22 @@ class TransformerVAE(nn.Module):
             nn.Linear(model_dim, output_dim*2),
             nn.ReLU(),
             nn.Linear(output_dim*2, output_dim),
-
-            )
+        )
         self.dropout = nn.Dropout(dropout)
+
+    def positional_encoding(self, seq_length, model_dim, device):
+        position = torch.arange(0, seq_length, dtype=torch.float, device=device).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, model_dim, 2, dtype=torch.float, device=device) * (-math.log(10000.0) / model_dim))
+        pe = torch.zeros(seq_length, model_dim, device=device)
+        pe[:, 0::2] = torch.sin(position * div_term)
+        pe[:, 1::2] = torch.cos(position * div_term)
+        return pe
 
     def encode(self, src):
         src_seq_length = src.size(1)
-        src_pos = torch.arange(0, src_seq_length, device=src.device).unsqueeze(0)
+        src_pos = self.positional_encoding(src_seq_length, self.embedding.embedding_dim, src.device).unsqueeze(0)
         
-        src = self.embedding(src) + self.pos_encoder(src_pos)
+        src = self.embedding(src) + src_pos
         src = self.dropout(src)
         
         memory = self.encoder(src)
@@ -178,24 +187,16 @@ class TransformerVAE(nn.Module):
 
     def decode(self, z, tgt):
         tgt_seq_length = tgt.size(1)
-        tgt_pos = torch.arange(0, tgt_seq_length, device=tgt.device).unsqueeze(0)
+        tgt_pos = self.positional_encoding(tgt_seq_length, self.embedding.embedding_dim, tgt.device).unsqueeze(0)
         
-        tgt = self.embedding(tgt) + self.pos_encoder(tgt_pos)
+        tgt = self.embedding(tgt) + tgt_pos
         tgt = self.dropout(tgt)
         
         z = self.fc_latent(z).unsqueeze(1).repeat(1, tgt_seq_length, 1)
-        
+        print(tgt.shape, z.shape)
         output = self.decoder(tgt, z)
         output = output[:, -1:, :]
-        #output = output.mean(dim=1)
-        #print(output.shape)
         output = self.fc_out(output)
-        
-        # Ensure the output shape is (32, 1, 24)
-        #print(output.shape)
-        
-        
-        
         
         return output
 
@@ -207,11 +208,11 @@ class TransformerVAE(nn.Module):
 
 # Define model parameters
 input_dim = len(vocab)
-model_dim = 64
-num_heads = 4
-num_layers = 3
+model_dim = 8
+num_heads = 8
+num_layers = 4
 output_dim = len(vocab)
-latent_dim = 12
+latent_dim = 32
 
 # Instantiate the model
 if model_path != None:
@@ -237,8 +238,8 @@ class FocalLoss(nn.Module):
         focal_loss = self.alpha * (1 - pt) ** self.gamma * ce_loss
         return focal_loss.mean()
 
-#criterion = FocalLoss(ignore_index=tokenizer.token_to_id("<pad>"))
-criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.token_to_id("<pad>"), reduction='mean')
+criterion = FocalLoss(ignore_index=tokenizer.token_to_id("<pad>"))
+#criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.token_to_id("<pad>"), reduction='mean')
 
 #optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
