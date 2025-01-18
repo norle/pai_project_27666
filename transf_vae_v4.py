@@ -3,10 +3,10 @@ from tokenizers import Tokenizer, models, pre_tokenizers, decoders, trainers, pr
 # Define training parameters
 num_epochs = 100
 learning_rate = 1e-2
-max_grad_norm = 1.0  # Maximum norm for gradient clipping
+max_grad_norm = 100  # Maximum norm for gradient clipping
 
 model_path = None
-#model_path = 'project/models/transformer_vae_v4_1.pth'
+#model_path = 'project/models/transformer_vae_large.pth'
 # Define the alphabet for protein sequences
 
 data_path = "project/data/large_subunit_filtered.fasta"
@@ -23,8 +23,8 @@ tokenizer.decoder = decoders.ByteLevel()
 
 # Define a trainer with the protein alphabet
 trainer = trainers.BpeTrainer(
-    vocab_size=len(protein_alphabet) + 4,  # +3 for <pad>, <eos>, and <s>
-    special_tokens=["<pad>", "<mask>", "<eos>", "<s>"],
+    vocab_size=len(protein_alphabet) + 3,  # +3 for <pad>, <eos>, and <s>
+    special_tokens=["<pad>", "<eos>", "<s>"],
     initial_alphabet=list(protein_alphabet)
 )
 
@@ -61,7 +61,7 @@ from Bio import SeqIO
 import math
 import matplotlib.pyplot as plt
 
-BATCH_SIZE = 32
+BATCH_SIZE = 128
 
 seq_length = 500
 
@@ -142,18 +142,30 @@ class TransformerVAE(nn.Module):
         encoder_layer = nn.TransformerEncoderLayer(d_model=model_dim, nhead=num_heads, dropout=dropout)
         self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
         
-        self.fc_mu = nn.Linear(model_dim, latent_dim)
-        self.fc_logvar = nn.Linear(model_dim, latent_dim)
+        self.fc_mu = nn.Sequential(
+            nn.Linear(model_dim, model_dim * 2),
+            nn.ReLU(),
+            nn.Linear(model_dim * 2, latent_dim)
+        )
+        self.fc_logvar = nn.Sequential(
+            nn.Linear(model_dim, model_dim * 2),
+            nn.ReLU(),
+            nn.Linear(model_dim * 2, latent_dim)
+        )
         
-        self.fc_latent = nn.Linear(latent_dim, model_dim)
+        self.fc_latent = nn.Sequential(
+            nn.Linear(latent_dim, model_dim // 2),
+            nn.ReLU(),
+            nn.Linear(model_dim // 2, model_dim)
+        )
         
         decoder_layer = nn.TransformerDecoderLayer(d_model=model_dim, nhead=num_heads, dropout=dropout)
         self.decoder = nn.TransformerDecoder(decoder_layer, num_layers=num_layers)
         
         self.fc_out = nn.Sequential(
-            nn.Linear(model_dim, output_dim*2),
+            nn.Linear(model_dim, output_dim * 2),
             nn.ReLU(),
-            nn.Linear(output_dim*2, output_dim),
+            nn.Linear(output_dim * 2, output_dim),
         )
         self.dropout = nn.Dropout(dropout)
 
@@ -193,7 +205,6 @@ class TransformerVAE(nn.Module):
         tgt = self.dropout(tgt)
         
         z = self.fc_latent(z).unsqueeze(1).repeat(1, tgt_seq_length, 1)
-        print(tgt.shape, z.shape)
         output = self.decoder(tgt, z)
         output = output[:, -1:, :]
         output = self.fc_out(output)
@@ -208,11 +219,11 @@ class TransformerVAE(nn.Module):
 
 # Define model parameters
 input_dim = len(vocab)
-model_dim = 8
+model_dim = 64
 num_heads = 8
 num_layers = 4
 output_dim = len(vocab)
-latent_dim = 32
+latent_dim = 16
 
 # Instantiate the model
 if model_path != None:
@@ -220,9 +231,6 @@ if model_path != None:
 else:
     model = TransformerVAE(input_dim, model_dim, num_heads, num_layers, output_dim, latent_dim).to(device)
 
-
-
-# Define loss function and optimizer
 # Define loss function and optimizer
 class FocalLoss(nn.Module):
     def __init__(self, alpha=1, gamma=2, ignore_index=0):
@@ -238,11 +246,11 @@ class FocalLoss(nn.Module):
         focal_loss = self.alpha * (1 - pt) ** self.gamma * ce_loss
         return focal_loss.mean()
 
-criterion = FocalLoss(ignore_index=tokenizer.token_to_id("<pad>"))
-#criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.token_to_id("<pad>"), reduction='mean')
+#criterion = FocalLoss(ignore_index=tokenizer.token_to_id("<pad>"))
+criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.token_to_id("<pad>"), reduction='mean')
 
-#optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+#optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=0.8)
 
 val_losses = []
 train_losses = []
@@ -264,25 +272,13 @@ for epoch in range(num_epochs):
             masked_src = src[:, :i] # source with tokens masked after position i
             tgt = src[:, i] # we predict ith token (one after mask)
             if tgt.eq(0).all():
-                #print("Target is all zeros, skipping this batch")
                 continue
 
-            #assert not torch.isnan(src).any(), "NaN values found in source data"
-            #assert not torch.isnan(tgt).any(), "NaN values found in target data"
-
             output, mu, logvar = model(src, masked_src)
-            output = output + 1e-8
-            #assert not torch.isnan(output).any(), "NaN values found in output"
-
             recon_loss = criterion(output.reshape(-1, output_dim), tgt.reshape(-1))
             kld_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-            loss = recon_loss + 0.1*kld_loss
-            if torch.isnan(loss):
-                print("Loss is NaN")
-                print("Recon Loss:", recon_loss)
-                print("KLD Loss:", kld_loss)
-                raise ValueError("Loss is NaN")
-                
+            loss = recon_loss + 0.1 * kld_loss
+            
             loss.backward()
             
             # Clip gradients
@@ -327,6 +323,33 @@ for epoch in range(num_epochs):
     print(f"Validation Loss: {avg_val_loss:.4f}")
 
     torch.save(model, "project/models/transformer_vae.pth")
+    val_loss = 0
+    val_loss_counter = 0
+    with torch.no_grad():
+        for batch in val_loader:
+            src = batch[0][:, :].to(device)
+            tgt = batch[0][:, :].to(device)
+            
+            for i in range(1, src.size(1)):
+                masked_src = src[:, :i]
+                tgt = src[:, i]
+                if tgt.eq(0).all():
+                    continue
+                
+                output_val, mu, logvar = model(src, masked_src)
+                
+                recon_loss = criterion(output_val.reshape(-1, output_dim), tgt.reshape(-1))
+                kld_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+                loss = recon_loss + kld_loss
+                
+                val_loss += loss.item()
+                val_loss_counter += 1
+
+    avg_val_loss = val_loss / val_loss_counter
+    val_losses.append(avg_val_loss)
+    print(f"Validation Loss: {avg_val_loss:.4f}")
+
+    torch.save(model, "project/models/transformer_vae_large.pth")
 
 #%% Save the model
 

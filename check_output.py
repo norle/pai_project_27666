@@ -1,4 +1,6 @@
 from tokenizers import Tokenizer, models, pre_tokenizers, decoders, trainers, processors
+import torch
+import math
 
 # Define training parameters
 num_epochs = 100
@@ -6,7 +8,7 @@ learning_rate = 1e-3
 max_grad_norm = 10  # Maximum norm for gradient clipping
 
 model_path = None
-model_path = 'project/models/transformer_vae.pth'
+model_path = 'project/models/transformer_vae_large.pth'
 # Define the alphabet for protein sequences
 protein_alphabet = "ACDEFGHIKLMNPQRSTVWY"
 
@@ -61,7 +63,7 @@ import matplotlib.pyplot as plt
 
 BATCH_SIZE = 32
 
-seq_length = 200
+seq_length = 500
 
 # Read a fasta file into a dataframe
 def read_fasta_to_df(fasta_file):
@@ -73,7 +75,7 @@ def read_fasta_to_df(fasta_file):
 
 
 # Example usage
-fasta_file = "project/data/clustered90_seq_rep_seq.fasta"
+fasta_file = "project/data/large_subunit_filtered.fasta"
 df = read_fasta_to_df(fasta_file)
 print(df.head())
 
@@ -134,7 +136,6 @@ class TransformerVAE(nn.Module):
     def __init__(self, input_dim, model_dim, num_heads, num_layers, output_dim, latent_dim, dropout=0):
         super(TransformerVAE, self).__init__()
         self.embedding = nn.Embedding(input_dim, model_dim)
-        self.pos_encoder = nn.Embedding(seq_length, model_dim)
         
         encoder_layer = nn.TransformerEncoderLayer(d_model=model_dim, nhead=num_heads, dropout=dropout)
         self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
@@ -151,15 +152,22 @@ class TransformerVAE(nn.Module):
             nn.Linear(model_dim, output_dim*2),
             nn.ReLU(),
             nn.Linear(output_dim*2, output_dim),
-
-            )
+        )
         self.dropout = nn.Dropout(dropout)
+
+    def positional_encoding(self, seq_length, model_dim, device):
+        position = torch.arange(0, seq_length, dtype=torch.float, device=device).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, model_dim, 2, dtype=torch.float, device=device) * (-math.log(10000.0) / model_dim))
+        pe = torch.zeros(seq_length, model_dim, device=device)
+        pe[:, 0::2] = torch.sin(position * div_term)
+        pe[:, 1::2] = torch.cos(position * div_term)
+        return pe
 
     def encode(self, src):
         src_seq_length = src.size(1)
-        src_pos = torch.arange(0, src_seq_length, device=src.device).unsqueeze(0)
+        src_pos = self.positional_encoding(src_seq_length, self.embedding.embedding_dim, src.device).unsqueeze(0)
         
-        src = self.embedding(src) + self.pos_encoder(src_pos)
+        src = self.embedding(src) + src_pos
         src = self.dropout(src)
         
         memory = self.encoder(src)
@@ -177,24 +185,15 @@ class TransformerVAE(nn.Module):
 
     def decode(self, z, tgt):
         tgt_seq_length = tgt.size(1)
-        tgt_pos = torch.arange(0, tgt_seq_length, device=tgt.device).unsqueeze(0)
+        tgt_pos = self.positional_encoding(tgt_seq_length, self.embedding.embedding_dim, tgt.device).unsqueeze(0)
         
-        tgt = self.embedding(tgt) + self.pos_encoder(tgt_pos)
+        tgt = self.embedding(tgt) + tgt_pos
         tgt = self.dropout(tgt)
         
         z = self.fc_latent(z).unsqueeze(1).repeat(1, tgt_seq_length, 1)
-        
         output = self.decoder(tgt, z)
         output = output[:, -1:, :]
-        #output = output.mean(dim=1)
-        #print(output.shape)
         output = self.fc_out(output)
-        
-        # Ensure the output shape is (32, 1, 24)
-        #print(output.shape)
-        
-        
-        
         
         return output
 
@@ -226,6 +225,8 @@ criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.token_to_id("<pad>"), red
 
 #%% Generate sequences
 #model = TransformerVAE(input_dim, model_dim, num_heads, num_layers, output_dim, latent_dim).to(device)
+import numpy as np
+
 with torch.no_grad():
     for batch in test_loader:
         src = batch[0][:, :].to(device)
@@ -269,4 +270,4 @@ with torch.no_grad():
         plt.xlabel('Principal Component 1')
         plt.ylabel('Principal Component 2')
         plt.title('PCA of Latent Space')
-        plt.show()
+        plt.savefig('project/figures/latent_space_pca.png')
