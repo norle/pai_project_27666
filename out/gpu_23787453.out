@@ -477,3 +477,184 @@ Batch 29 loss: 2.7458
 Batch 30 loss: 2.7461
 Batch 31 loss: 2.7455
 Batch 32 loss: 2.7458
+Batch 33 loss: 2.7454
+Batch 34 loss: 2.7453
+Batch 35 loss: 2.7447
+Batch 36 loss: 2.7447
+Batch 37 loss: 2.7447
+Batch 38 loss: 2.7450
+Batch 39 loss: 2.7452
+Batch 40 loss: 2.7454
+Batch 41 loss: 2.7463
+Batch 42 loss: 2.7468
+Batch 43 loss: 2.7463
+Batch 44 loss: 2.7462
+Batch 45 loss: 2.7470
+Batch 46 loss: 2.7465
+Batch 47 loss: 2.7466
+Batch 48 loss: 2.7464
+Batch 49 loss: 2.7463
+Batch 50 loss: 2.7462
+Batch 51 loss: 2.7455
+Batch 52 loss: 2.7457
+Batch 53 loss: 2.7454
+Batch 54 loss: 2.7450
+Batch 55 loss: 2.7449
+Batch 56 loss: 2.7454
+Batch 57 loss: 2.7456
+Batch 58 loss: 2.7453
+Batch 59 loss: 2.7452
+Batch 60 loss: 2.7449
+Batch 61 loss: 2.7454
+Batch 62 loss: 2.7457
+Batch 63 loss: 2.7454
+Batch 64 loss: 2.7450
+Batch 65 loss: 2.7450
+Batch 66 loss: 2.7447
+Batch 67 loss: 2.7445
+Batch 68 loss: 2.7443
+Batch 69 loss: 2.7443
+Batch 70 loss: 2.7439
+Batch 71 loss: 2.7441
+Batch 72 loss: 2.7441
+Batch 73 loss: 2.7436
+Batch 74 loss: 2.7435
+Batch 75 loss: 2.7434
+Batch 76 loss: 2.7433
+Batch 77 loss: 2.7436
+Batch 78 loss: 2.7432
+Batch 79 loss: 2.7429
+Batch 80 loss: 2.7429
+Batch 81 loss: 2.7427
+Batch 82 loss: 2.7425
+Batch 83 loss: 2.7425
+Batch 84 loss: 2.7422
+Batch 85 loss: 2.7424
+Batch 86 loss: 2.7423
+Batch 87 loss: 2.7422
+Batch 88 loss: 2.7418
+Batch 89 loss: 2.7416
+Batch 90 loss: 2.7416
+Batch 91 loss: 2.7413
+Batch 92 loss: 2.7408
+Batch 93 loss: 2.7406
+Batch 94 loss: 2.7404
+Batch 95 loss: 2.7405
+Batch 96 loss: 2.7401
+Epoch [5/100], Loss: 2.7401
+Validation Loss: 2.7377
+Validation Loss: 2.7366
+Batch 0 loss: 2.7148
+Batch 1 loss: 2.7188
+Batch 2 loss: 2.7265
+Batch 3 loss: 2.7268
+Batch 4 loss: 2.7251
+Batch 5 loss: 2.7277
+Batch 6 loss: 2.7238
+Batch 7 loss: 2.7218
+Batch 8 loss: 2.7230
+Batch 9 loss: 2.7202
+Batch 10 loss: 2.7216
+Batch 11 loss: 2.7234
+Batch 12 loss: 2.7227
+Batch 13 loss: 2.7241
+Batch 14 loss: 2.7249
+Batch 15 loss: 2.7285
+Batch 16 loss: 2.7288
+Batch 17 loss: 2.7281
+Batch 18 loss: 2.7277
+Batch 19 loss: 2.7262
+Batch 20 loss: 2.7254
+Batch 21 loss: 2.7261
+Batch 22 loss: 2.7257
+Batch 23 loss: 2.7253
+Batch 24 loss: 2.7248
+Batch 25 loss: 2.7250
+Batch 26 loss: 2.7249
+Batch 27 loss: 2.7251
+Batch 28 loss: 2.7262
+Batch 29 loss: 2.7252
+Batch 30 loss: 2.7253
+Batch 31 loss: 2.7251
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 23787453: <transf_vae_4> in cluster <dcc> Exited
+
+Job <transf_vae_4> was submitted from host <hpclogin1> by user <s233201> in cluster <dcc> at Sat Jan 18 11:32:29 2025
+Job was executed on host(s) <4*n-62-18-12>, in queue <c27666>, as user <s233201> in cluster <dcc> at Sat Jan 18 11:32:29 2025
+</zhome/85/8/203063> was used as the home directory.
+</zhome/85/8/203063/pai_course> was used as the working directory.
+Started at Sat Jan 18 11:32:29 2025
+Terminated at Sat Jan 18 16:15:11 2025
+Results reported at Sat Jan 18 16:15:11 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q c27666 
+### -- set the job Name --
+#BSUB -J transf_vae_4
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 8:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=16GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start --
+##BSUB -B
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o project/out/gpu_%J.out
+#BSUB -e project/out/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+module load cuda/11.6
+
+source pai/bin/activate
+
+python -u project/transf_vae_v4.py 
+
+
+
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   16910.12 sec.
+    Max Memory :                                 1170 MB
+    Average Memory :                             1138.79 MB
+    Total Requested Memory :                     65536.00 MB
+    Delta Memory :                               64366.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                13
+    Run time :                                   17060 sec.
+    Turnaround time :                            16962 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <project/out/gpu_23787453.err> for stderr output of this job.
+

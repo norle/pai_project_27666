@@ -177,14 +177,14 @@ class TransformerVAE(nn.Module):
         pe[:, 1::2] = torch.cos(position * div_term)
         return pe
 
-    def encode(self, src):
+    def encode(self, src, src_mask):
         src_seq_length = src.size(1)
         src_pos = self.positional_encoding(src_seq_length, self.embedding.embedding_dim, src.device).unsqueeze(0)
         
         src = self.embedding(src) + src_pos
         src = self.dropout(src)
         
-        memory = self.encoder(src)
+        memory = self.encoder(src, src_key_padding_mask=src_mask)
         memory = memory.mean(dim=1)
         
         mu = self.fc_mu(memory)
@@ -197,7 +197,7 @@ class TransformerVAE(nn.Module):
         eps = torch.randn_like(std)
         return mu + eps * std
 
-    def decode(self, z, tgt):
+    def decode(self, z, tgt, tgt_mask):
         tgt_seq_length = tgt.size(1)
         tgt_pos = self.positional_encoding(tgt_seq_length, self.embedding.embedding_dim, tgt.device).unsqueeze(0)
         
@@ -205,19 +205,17 @@ class TransformerVAE(nn.Module):
         tgt = self.dropout(tgt)
         
         z = self.fc_latent(z).unsqueeze(1).repeat(1, tgt_seq_length, 1)
-        output = self.decoder(tgt, z)
+        output = self.decoder(tgt, z, tgt_key_padding_mask=tgt_mask)
         output = output[:, -1:, :]
         output = self.fc_out(output)
         
         return output
 
-    def forward(self, src, tgt):
-        mu, logvar = self.encode(src)
+    def forward(self, src, tgt, src_mask, tgt_mask):
+        mu, logvar = self.encode(src, src_mask)
         z = self.reparameterize(mu, logvar)
-        output = self.decode(z, tgt)
+        output = self.decode(z, tgt, tgt_mask)
         return output, mu, logvar
-
-# Define model parameters
 input_dim = len(vocab)
 model_dim = 64
 num_heads = 8
@@ -254,102 +252,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 val_losses = []
 train_losses = []
-# Training loop
-for epoch in range(num_epochs):
-    model.train()
-    total_loss = 0
-    loss_counter = 0
-    for nx, batch in enumerate(train_loader):
 
-        src = batch[0][:, :].to(device)
-        tgt = batch[0][:, :].to(device)
-        
-        
-        
-        # Gradually mask the source
-        for i in range(1, src.size(1)):
-            optimizer.zero_grad()
-            masked_src = src[:, :i] # source with tokens masked after position i
-            tgt = src[:, i] # we predict ith token (one after mask)
-            if tgt.eq(0).all():
-                continue
-
-            output, mu, logvar = model(src, masked_src)
-            recon_loss = criterion(output.reshape(-1, output_dim), tgt.reshape(-1))
-            kld_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-            loss = recon_loss + 0.1 * kld_loss
-            
-            loss.backward()
-            
-            # Clip gradients
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_grad_norm)
-            
-            optimizer.step()
-            
-            total_loss += loss.item()
-            loss_counter += 1
-        print(f"Batch {nx} loss: {total_loss / loss_counter:.4f}")
-    
-    avg_loss = total_loss / loss_counter
-    train_losses.append(avg_loss)
-    print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")
-    
-    # Validation loop
-    model.eval()
-    val_loss = 0
-    val_loss_counter = 0
-    with torch.no_grad():
-        for batch in val_loader:
-            src = batch[0][:, :].to(device)
-            tgt = batch[0][:, :].to(device)
-            
-            for i in range(1, src.size(1)):
-                masked_src = src[:, :i]
-                tgt = src[:, i]
-                if tgt.eq(0).all():
-                    continue
-                
-                output_val, mu, logvar = model(src, masked_src)
-                
-                recon_loss = criterion(output_val.reshape(-1, output_dim), tgt.reshape(-1))
-                kld_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-                loss = recon_loss + kld_loss
-                
-                val_loss += loss.item()
-                val_loss_counter += 1
-
-    avg_val_loss = val_loss / val_loss_counter
-    val_losses.append(avg_val_loss)
-    print(f"Validation Loss: {avg_val_loss:.4f}")
-
-    torch.save(model, "project/models/transformer_vae.pth")
-    val_loss = 0
-    val_loss_counter = 0
-    with torch.no_grad():
-        for batch in val_loader:
-            src = batch[0][:, :].to(device)
-            tgt = batch[0][:, :].to(device)
-            
-            for i in range(1, src.size(1)):
-                masked_src = src[:, :i]
-                tgt = src[:, i]
-                if tgt.eq(0).all():
-                    continue
-                
-                output_val, mu, logvar = model(src, masked_src)
-                
-                recon_loss = criterion(output_val.reshape(-1, output_dim), tgt.reshape(-1))
-                kld_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-                loss = recon_loss + kld_loss
-                
-                val_loss += loss.item()
-                val_loss_counter += 1
-
-    avg_val_loss = val_loss / val_loss_counter
-    val_losses.append(avg_val_loss)
-    print(f"Validation Loss: {avg_val_loss:.4f}")
-
-    torch.save(model, "project/models/transformer_vae_large.pth")
 
 #%% Save the model
 

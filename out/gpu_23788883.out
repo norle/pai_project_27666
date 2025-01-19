@@ -1,0 +1,263 @@
+Sat Jan 18 16:27:08 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100 80GB PCIe          On  |   00000000:CA:00.0 Off |                   On |
+| N/A   46C    P0             66W /  300W |      88MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    5   0   0  |              25MiB / 19968MiB    | 28      0 |  2   0    1    0    0 |
+|                  |                 0MiB / 32767MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+
+
+['<s>', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', '<eos>']
+Vocabulary: {'Q': 16, 'G': 8, 'H': 9, 'N': 14, 'W': 21, 'R': 17, '<s>': 2, 'D': 5, 'C': 4, 'K': 11, 'V': 20, 'Y': 22, 'A': 3, '<pad>': 0, 'F': 7, 'I': 10, 'P': 15, 'L': 12, 'T': 19, 'S': 18, '<eos>': 1, 'M': 13, 'E': 6}
+Vocabulary size: 23
+                               ID                                           Sequence
+0  tr|A0A011QCF7|A0A011QCF7_9PROT  MLPGRTPAAQLKLTILHIDARENNMDQSNRYADLSLREEDLIAGGK...
+1  tr|A0A021X0E6|A0A021X0E6_9HYPH  MIRLTYRIETAGSPEAMAAKIASDQSTGTFVALPGETEELKARVAA...
+2  tr|A0A023CSQ7|A0A023CSQ7_9BACI  MSQVIATYLIHDEKDIKKKAEGIALGLTVGTWTDLPLLEQEQLRKH...
+3  tr|A0A023D5D1|A0A023D5D1_ACIMT  MNEITEIRGRDRYRAGVLKYAQMGYWDSDYTPSDTDLLALFRITPQ...
+4  tr|A0A023PKS2|A0A023PKS2_9STRA  MFQSVEERTRIKNERYESGVIPYAEMGYWDANYTIKDTDVLALFRI...
+Train dataset size: 3080
+Validation dataset size: 385
+Test dataset size: 385
+Epoch 1/200, Training Loss: 3.5715, Validation Loss: 2.9440
+Epoch 2/200, Training Loss: 2.9162, Validation Loss: 2.9009
+Epoch 3/200, Training Loss: 2.8962, Validation Loss: 2.8907
+Epoch 4/200, Training Loss: 2.8900, Validation Loss: 2.8881
+Epoch 5/200, Training Loss: 2.8870, Validation Loss: 2.8848
+Epoch 6/200, Training Loss: 2.8841, Validation Loss: 2.8819
+Epoch 7/200, Training Loss: 2.8838, Validation Loss: 2.8815
+Epoch 8/200, Training Loss: 2.8837, Validation Loss: 2.8815
+Epoch 9/200, Training Loss: 2.8835, Validation Loss: 2.8812
+Epoch 10/200, Training Loss: 2.8833, Validation Loss: 2.8812
+Epoch 11/200, Training Loss: 2.8831, Validation Loss: 2.8810
+Epoch 12/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 13/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 14/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 15/200, Training Loss: 2.8831, Validation Loss: 2.8809
+Epoch 16/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 17/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 18/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 19/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 20/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 21/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 22/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 23/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 24/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 25/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 26/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 27/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 28/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 29/200, Training Loss: 2.8828, Validation Loss: 2.8809
+Epoch 30/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 31/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 32/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 33/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 34/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 35/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 36/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 37/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 38/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 39/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 40/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 41/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 42/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 43/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 44/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 45/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 46/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 47/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 48/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 49/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 50/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 51/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 52/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 53/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 54/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 55/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 56/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 57/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 58/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 59/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 60/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 61/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 62/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 63/200, Training Loss: 2.8828, Validation Loss: 2.8808
+Epoch 64/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 65/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 66/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 67/200, Training Loss: 2.8829, Validation Loss: 2.8807
+Epoch 68/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 69/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 70/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 71/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 72/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 73/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 74/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 75/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 76/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 77/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 78/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 79/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 80/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 81/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 82/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 83/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 84/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 85/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 86/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 87/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 88/200, Training Loss: 2.8829, Validation Loss: 2.8807
+Epoch 89/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 90/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 91/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 92/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 93/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 94/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 95/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 96/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 97/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 98/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 99/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 100/200, Training Loss: 2.8830, Validation Loss: 2.8809
+Epoch 101/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 102/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 103/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 104/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 105/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 106/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 107/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 108/200, Training Loss: 2.8829, Validation Loss: 2.8807
+Epoch 109/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 110/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 111/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 112/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 113/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 114/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 115/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 116/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 117/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 118/200, Training Loss: 2.8830, Validation Loss: 2.8807
+Epoch 119/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 120/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 121/200, Training Loss: 2.8829, Validation Loss: 2.8809
+Epoch 122/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 123/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 124/200, Training Loss: 2.8829, Validation Loss: 2.8807
+Epoch 125/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 126/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 127/200, Training Loss: 2.8830, Validation Loss: 2.8808
+Epoch 128/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 129/200, Training Loss: 2.8829, Validation Loss: 2.8807
+Epoch 130/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 131/200, Training Loss: 2.8829, Validation Loss: 2.8807
+Epoch 132/200, Training Loss: 2.8828, Validation Loss: 2.8808
+Epoch 133/200, Training Loss: 2.8830, Validation Loss: 2.8807
+Epoch 134/200, Training Loss: 2.8829, Validation Loss: 2.8808
+Epoch 135/200, Training Loss: 2.8830, Validation Loss: 2.8808
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 23788883: <transf_vae_4> in cluster <dcc> Exited
+
+Job <transf_vae_4> was submitted from host <hpclogin1> by user <s233201> in cluster <dcc> at Sat Jan 18 16:27:06 2025
+Job was executed on host(s) <4*n-62-18-12>, in queue <c27666>, as user <s233201> in cluster <dcc> at Sat Jan 18 16:27:07 2025
+</zhome/85/8/203063> was used as the home directory.
+</zhome/85/8/203063/pai_course> was used as the working directory.
+Started at Sat Jan 18 16:27:07 2025
+Terminated at Sat Jan 18 17:13:18 2025
+Results reported at Sat Jan 18 17:13:18 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q c27666 
+### -- set the job Name --
+#BSUB -J transf_vae_4
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 8:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=16GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start --
+##BSUB -B
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o project/out/gpu_%J.out
+#BSUB -e project/out/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+module load cuda/11.6
+
+source pai/bin/activate
+
+python -u project/transf_vae_v5.py 
+
+
+
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   2763.22 sec.
+    Max Memory :                                 1204 MB
+    Average Memory :                             1003.41 MB
+    Total Requested Memory :                     65536.00 MB
+    Delta Memory :                               64332.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                13
+    Run time :                                   2773 sec.
+    Turnaround time :                            2772 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <project/out/gpu_23788883.err> for stderr output of this job.
+
