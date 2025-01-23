@@ -1,0 +1,363 @@
+Sun Jan 19 19:28:14 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100 80GB PCIe          On  |   00000000:65:00.0 Off |                   On |
+| N/A   37C    P0             65W /  300W |      88MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    5   0   0  |              25MiB / 19968MiB    | 28      0 |  2   0    1    0    0 |
+|                  |                 0MiB / 32767MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+
+
+['<s>', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', '<eos>']
+Vocabulary: {'I': 10, 'E': 6, 'T': 19, 'C': 4, 'A': 3, 'D': 5, 'F': 7, 'K': 11, 'M': 13, 'Q': 16, '<s>': 2, 'V': 20, 'Y': 22, 'S': 18, 'R': 17, 'W': 21, 'P': 15, 'G': 8, 'L': 12, '<eos>': 1, '<pad>': 0, 'N': 14, 'H': 9}
+Vocabulary size: 23
+                               ID                                           Sequence
+0  tr|A0A5P8N3Y8|A0A5P8N3Y8_9POAL  MAPTVMASSATSVAPFQGLKSTASLPVARRSTNGFGNVRTGGRIRC...
+1  tr|A0A5P8U3Q8|A0A5P8U3Q8_9ROSI  MASSILSSAAVASVNSASPAQASMVAPFTGLKSSAGFPITRKNNVD...
+2  tr|A0A5Q0EJT5|A0A5Q0EJT5_9GAMM  MSSFEVGDYQTAQTLETFGFLPKLTQDEVYDQIDYLIAQGWTPAIE...
+3  tr|A0A5Q4E8P1|A0A5Q4E8P1_9CYAN  MWVTTALLAFALRYLMSRWATAALWSGPTLVTTQESEVLAQIEQFL...
+4  tr|A0A5Q4EAI2|A0A5Q4EAI2_9CYAN  MAIRTPAVSPPQQWSSASAVATAQGQGQVLVESGVSLAVGAVVQAD...
+Train dataset size: 2007
+Validation dataset size: 251
+Test dataset size: 251
+Batch 0 loss: 3.2402
+Batch 1 loss: 3.1354
+Batch 2 loss: 3.0804
+Batch 3 loss: 3.0411
+Batch 4 loss: 3.0193
+Batch 5 loss: 2.9937
+Batch 6 loss: 2.9772
+Batch 7 loss: 2.9542
+Batch 8 loss: 2.9360
+Batch 9 loss: 2.9159
+Batch 10 loss: 2.8994
+Batch 11 loss: 2.8898
+Batch 12 loss: 2.8729
+Batch 13 loss: 2.8580
+Batch 14 loss: 2.8444
+Batch 15 loss: 2.8338
+Batch 16 loss: 2.8208
+Batch 17 loss: 2.8119
+Batch 18 loss: 2.8001
+Batch 19 loss: 2.7878
+Batch 20 loss: 2.7844
+Batch 21 loss: 2.7766
+Batch 22 loss: 2.7669
+Batch 23 loss: 2.7546
+Batch 24 loss: 2.7516
+Batch 25 loss: 2.7438
+Batch 26 loss: 2.7356
+Batch 27 loss: 2.7246
+Batch 28 loss: 2.7142
+Batch 29 loss: 2.7065
+Batch 30 loss: 2.6956
+Batch 31 loss: 2.6902
+Batch 32 loss: 2.6814
+Batch 33 loss: 2.6758
+Batch 34 loss: 2.6691
+Batch 35 loss: 2.6595
+Batch 36 loss: 2.6533
+Batch 37 loss: 2.6504
+Batch 38 loss: 2.6433
+Batch 39 loss: 2.6385
+Batch 40 loss: 2.6359
+Batch 41 loss: 2.6321
+Batch 42 loss: 2.6299
+Batch 43 loss: 2.6240
+Batch 44 loss: 2.6192
+Batch 45 loss: 2.6130
+Batch 46 loss: 2.6116
+Batch 47 loss: 2.6060
+Batch 48 loss: 2.5996
+Batch 49 loss: 2.5914
+Batch 50 loss: 2.5850
+Batch 51 loss: 2.5826
+Batch 52 loss: 2.5799
+Batch 53 loss: 2.5791
+Batch 54 loss: 2.5779
+Batch 55 loss: 2.5757
+Batch 56 loss: 2.5756
+Batch 57 loss: 2.5719
+Batch 58 loss: 2.5708
+Batch 59 loss: 2.5672
+Batch 60 loss: 2.5641
+Batch 61 loss: 2.5602
+Batch 62 loss: 2.5556
+Epoch [1/100], Loss: 2.5556
+Validation Loss: 2.4288
+Current Learning Rate: 0.01
+Batch 0 loss: 2.3170
+Batch 1 loss: 2.3254
+Batch 2 loss: 2.3093
+Batch 3 loss: 2.3299
+Batch 4 loss: 2.3165
+Batch 5 loss: 2.2571
+Batch 6 loss: 2.2783
+Batch 7 loss: 2.2712
+Batch 8 loss: 2.2900
+Batch 9 loss: 2.3033
+Batch 10 loss: 2.2954
+Batch 11 loss: 2.3130
+Batch 12 loss: 2.3112
+Batch 13 loss: 2.3073
+Batch 14 loss: 2.2951
+Batch 15 loss: 2.2977
+Batch 16 loss: 2.3030
+Batch 17 loss: 2.3030
+Batch 18 loss: 2.3125
+Batch 19 loss: 2.3149
+Batch 20 loss: 2.3213
+Batch 21 loss: 2.3220
+Batch 22 loss: 2.3270
+Batch 23 loss: 2.3234
+Batch 24 loss: 2.3167
+Batch 25 loss: 2.3154
+Batch 26 loss: 2.3166
+Batch 27 loss: 2.3099
+Batch 28 loss: 2.3079
+Batch 29 loss: 2.3051
+Batch 30 loss: 2.3021
+Batch 31 loss: 2.3030
+Batch 32 loss: 2.3048
+Batch 33 loss: 2.3073
+Batch 34 loss: 2.3102
+Batch 35 loss: 2.3095
+Batch 36 loss: 2.3105
+Batch 37 loss: 2.3098
+Batch 38 loss: 2.3078
+Batch 39 loss: 2.3070
+Batch 40 loss: 2.3082
+Batch 41 loss: 2.3040
+Batch 42 loss: 2.3052
+Batch 43 loss: 2.3039
+Batch 44 loss: 2.3025
+Batch 45 loss: 2.2985
+Batch 46 loss: 2.2956
+Batch 47 loss: 2.2931
+Batch 48 loss: 2.2931
+Batch 49 loss: 2.2937
+Batch 50 loss: 2.2933
+Batch 51 loss: 2.2924
+Batch 52 loss: 2.2933
+Batch 53 loss: 2.2941
+Batch 54 loss: 2.2905
+Batch 55 loss: 2.2906
+Batch 56 loss: 2.2898
+Batch 57 loss: 2.2879
+Batch 58 loss: 2.2883
+Batch 59 loss: 2.2871
+Batch 60 loss: 2.2870
+Batch 61 loss: 2.2853
+Batch 62 loss: 2.2831
+Epoch [2/100], Loss: 2.2831
+Validation Loss: 2.3693
+Current Learning Rate: 0.01
+Batch 0 loss: 2.4027
+Batch 1 loss: 2.2870
+Batch 2 loss: 2.3191
+Batch 3 loss: 2.3331
+Batch 4 loss: 2.2799
+Batch 5 loss: 2.2880
+Batch 6 loss: 2.2956
+Batch 7 loss: 2.2984
+Batch 8 loss: 2.2833
+Batch 9 loss: 2.2760
+Batch 10 loss: 2.2681
+Batch 11 loss: 2.2451
+Batch 12 loss: 2.2526
+Batch 13 loss: 2.2478
+Batch 14 loss: 2.2495
+Batch 15 loss: 2.2473
+Batch 16 loss: 2.2474
+Batch 17 loss: 2.2403
+Batch 18 loss: 2.2345
+Batch 19 loss: 2.2433
+Batch 20 loss: 2.2434
+Batch 21 loss: 2.2427
+Batch 22 loss: 2.2324
+Batch 23 loss: 2.2318
+Batch 24 loss: 2.2262
+Batch 25 loss: 2.2359
+Batch 26 loss: 2.2326
+Batch 27 loss: 2.2350
+Batch 28 loss: 2.2310
+Batch 29 loss: 2.2324
+Batch 30 loss: 2.2243
+Batch 31 loss: 2.2157
+Batch 32 loss: 2.2153
+Batch 33 loss: 2.2196
+Batch 34 loss: 2.2227
+Batch 35 loss: 2.2237
+Batch 36 loss: 2.2281
+Batch 37 loss: 2.2324
+Batch 38 loss: 2.2273
+Batch 39 loss: 2.2298
+Batch 40 loss: 2.2270
+Batch 41 loss: 2.2257
+Batch 42 loss: 2.2233
+Batch 43 loss: 2.2218
+Batch 44 loss: 2.2197
+Batch 45 loss: 2.2180
+Batch 46 loss: 2.2142
+Batch 47 loss: 2.2119
+Batch 48 loss: 2.2095
+Batch 49 loss: 2.2123
+Batch 50 loss: 2.2107
+Batch 51 loss: 2.2126
+Batch 52 loss: 2.2107
+Batch 53 loss: 2.2095
+Batch 54 loss: 2.2079
+Batch 55 loss: 2.2119
+Batch 56 loss: 2.2105
+Batch 57 loss: 2.2124
+Batch 58 loss: 2.2106
+Batch 59 loss: 2.2105
+Batch 60 loss: 2.2080
+Batch 61 loss: 2.2058
+Batch 62 loss: 2.2049
+Epoch [3/100], Loss: 2.2049
+Validation Loss: 2.2562
+Current Learning Rate: 0.01
+Batch 0 loss: 2.0918
+Batch 1 loss: 2.2410
+Batch 2 loss: 2.1969
+Batch 3 loss: 2.1667
+Batch 4 loss: 2.1642
+Batch 5 loss: 2.1885
+Batch 6 loss: 2.1788
+Batch 7 loss: 2.1600
+Batch 8 loss: 2.1599
+Batch 9 loss: 2.1689
+Batch 10 loss: 2.1782
+Batch 11 loss: 2.1806
+Batch 12 loss: 2.1923
+Batch 13 loss: 2.1938
+Batch 14 loss: 2.1911
+Batch 15 loss: 2.1822
+Batch 16 loss: 2.1814
+Batch 17 loss: 2.1816
+Batch 18 loss: 2.1719
+Batch 19 loss: 2.1636
+Batch 20 loss: 2.1642
+Batch 21 loss: 2.1624
+Batch 22 loss: 2.1542
+Batch 23 loss: 2.1470
+Batch 24 loss: 2.1475
+Batch 25 loss: 2.1477
+Batch 26 loss: 2.1508
+Batch 27 loss: 2.1544
+Batch 28 loss: 2.1608
+Batch 29 loss: 2.1566
+Batch 30 loss: 2.1514
+Batch 31 loss: 2.1483
+Batch 32 loss: 2.1446
+Batch 33 loss: 2.1474
+Batch 34 loss: 2.1441
+Batch 35 loss: 2.1434
+Batch 36 loss: 2.1481
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 23796054: <transf_vae_4> in cluster <dcc> Exited
+
+Job <transf_vae_4> was submitted from host <n-62-20-1> by user <s233201> in cluster <dcc> at Sun Jan 19 19:28:12 2025
+Job was executed on host(s) <4*n-62-18-12>, in queue <c27666>, as user <s233201> in cluster <dcc> at Sun Jan 19 19:28:12 2025
+</zhome/85/8/203063> was used as the home directory.
+</zhome/85/8/203063/pai_course> was used as the working directory.
+Started at Sun Jan 19 19:28:12 2025
+Terminated at Sun Jan 19 20:22:21 2025
+Results reported at Sun Jan 19 20:22:21 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q c27666 
+### -- set the job Name --
+#BSUB -J transf_vae_4
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 8:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=16GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start --
+##BSUB -B
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o project/out/gpu_%J.out
+#BSUB -e project/out/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+module load cuda/11.6
+
+source pai/bin/activate
+
+python -u project/transf_vae_v4.py 
+
+
+
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   3243.77 sec.
+    Max Memory :                                 1123 MB
+    Average Memory :                             1088.50 MB
+    Total Requested Memory :                     65536.00 MB
+    Delta Memory :                               64413.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                13
+    Run time :                                   3259 sec.
+    Turnaround time :                            3249 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <project/out/gpu_23796054.err> for stderr output of this job.
+

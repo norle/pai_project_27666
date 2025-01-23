@@ -1,0 +1,129 @@
+Sun Jan 19 19:27:10 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100 80GB PCIe          On  |   00000000:65:00.0 Off |                   On |
+| N/A   33C    P0             63W /  300W |      88MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    5   0   0  |              25MiB / 19968MiB    | 28      0 |  2   0    1    0    0 |
+|                  |                 0MiB / 32767MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+
+
+['<s>', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', '<eos>']
+Vocabulary: {'K': 12, '<eos>': 2, 'Y': 23, 'D': 6, 'N': 15, 'T': 20, '<mask>': 1, 'A': 4, 'H': 10, 'M': 14, 'P': 16, 'C': 5, 'F': 8, 'E': 7, 'I': 11, 'R': 18, 'L': 13, 'S': 19, 'V': 21, 'Q': 17, '<pad>': 0, 'G': 9, 'W': 22, '<s>': 3}
+Vocabulary size: 24
+                               ID                                           Sequence
+0  tr|A0A5P8N3Y8|A0A5P8N3Y8_9POAL  MAPTVMASSATSVAPFQGLKSTASLPVARRSTNGFGNVRTGGRIRC...
+1  tr|A0A5P8U3Q8|A0A5P8U3Q8_9ROSI  MASSILSSAAVASVNSASPAQASMVAPFTGLKSSAGFPITRKNNVD...
+2  tr|A0A5Q0EJT5|A0A5Q0EJT5_9GAMM  MSSFEVGDYQTAQTLETFGFLPKLTQDEVYDQIDYLIAQGWTPAIE...
+3  tr|A0A5Q4E8P1|A0A5Q4E8P1_9CYAN  MWVTTALLAFALRYLMSRWATAALWSGPTLVTTQESEVLAQIEQFL...
+4  tr|A0A5Q4EAI2|A0A5Q4EAI2_9CYAN  MAIRTPAVSPPQQWSSASAVATAQGQGQVLVESGVSLAVGAVVQAD...
+Train dataset size: 2007
+Validation dataset size: 251
+Test dataset size: 251
+Batch 0 loss: 3.3897
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 23796053: <transf_vae_4> in cluster <dcc> Exited
+
+Job <transf_vae_4> was submitted from host <n-62-20-1> by user <s233201> in cluster <dcc> at Sun Jan 19 19:27:06 2025
+Job was executed on host(s) <4*n-62-18-12>, in queue <c27666>, as user <s233201> in cluster <dcc> at Sun Jan 19 19:27:08 2025
+</zhome/85/8/203063> was used as the home directory.
+</zhome/85/8/203063/pai_course> was used as the working directory.
+Started at Sun Jan 19 19:27:08 2025
+Terminated at Sun Jan 19 19:27:53 2025
+Results reported at Sun Jan 19 19:27:53 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q c27666 
+### -- set the job Name --
+#BSUB -J transf_vae_4
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 8:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=16GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start --
+##BSUB -B
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o project/out/gpu_%J.out
+#BSUB -e project/out/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+module load cuda/11.6
+
+source pai/bin/activate
+
+python -u project/transf_vae_v4.py 
+
+
+
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   36.53 sec.
+    Max Memory :                                 910 MB
+    Average Memory :                             607.00 MB
+    Total Requested Memory :                     65536.00 MB
+    Delta Memory :                               64626.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                13
+    Run time :                                   53 sec.
+    Turnaround time :                            47 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <project/out/gpu_23796053.err> for stderr output of this job.
+

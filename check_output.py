@@ -8,7 +8,7 @@ learning_rate = 1e-3
 max_grad_norm = 10  # Maximum norm for gradient clipping
 
 model_path = None
-model_path = 'project/models/transformer_vae_large.pth'
+model_path = 'project/models/transformer_vae_v4_1.pth'
 # Define the alphabet for protein sequences
 protein_alphabet = "ACDEFGHIKLMNPQRSTVWY"
 
@@ -24,7 +24,7 @@ tokenizer.decoder = decoders.ByteLevel()
 # Define a trainer with the protein alphabet
 trainer = trainers.BpeTrainer(
     vocab_size=len(protein_alphabet) + 3,  # +3 for <pad>, <eos>, and <s>
-    special_tokens=["<pad>", "<mask>", "<eos>", "<s>"],
+    special_tokens=["<pad>", "<eos>", "<s>"],
     initial_alphabet=list(protein_alphabet)
 )
 
@@ -63,7 +63,7 @@ import matplotlib.pyplot as plt
 
 BATCH_SIZE = 32
 
-seq_length = 500
+seq_length = 200
 
 # Read a fasta file into a dataframe
 def read_fasta_to_df(fasta_file):
@@ -75,7 +75,8 @@ def read_fasta_to_df(fasta_file):
 
 
 # Example usage
-fasta_file = "project/data/large_subunit_filtered.fasta"
+#fasta_file = "project/data/large_subunit_filtered.fasta"
+fasta_file = 'project/data/clustered90_seq_rep_seq.fasta'
 df = read_fasta_to_df(fasta_file)
 print(df.head())
 
@@ -133,7 +134,7 @@ import torch.nn.functional as F
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class TransformerVAE(nn.Module):
-    def __init__(self, input_dim, model_dim, num_heads, num_layers, output_dim, latent_dim, dropout=0):
+    def __init__(self, input_dim, model_dim, num_heads, num_layers, output_dim, latent_dim, dropout=0.05):
         super(TransformerVAE, self).__init__()
         self.embedding = nn.Embedding(input_dim, model_dim)
         
@@ -191,6 +192,7 @@ class TransformerVAE(nn.Module):
         tgt = self.dropout(tgt)
         
         z = self.fc_latent(z).unsqueeze(1).repeat(1, tgt_seq_length, 1)
+        #print(tgt.shape, z.shape)
         output = self.decoder(tgt, z)
         output = output[:, -1:, :]
         output = self.fc_out(output)
@@ -232,7 +234,7 @@ with torch.no_grad():
         src = batch[0][:, :].to(device)
         
         # Initialize gen_seq with the same batch size as src
-        gen_seq = torch.tensor([[3]] * src.size(0)).to(device)
+        gen_seq = torch.tensor([[2]] * src.size(0)).to(device)
         
         for i in range(1, src.size(1)):
             masked_src = src[:, :i]
@@ -246,8 +248,9 @@ with torch.no_grad():
                 next_token = next_token.unsqueeze(1)
             gen_seq = torch.cat([gen_seq, next_token[:, -1].unsqueeze(1)], dim=-1)
 
-        print("Generated Sequence:", gen_seq[0])
-        print("Actual Sequence:", src[0])
+        decoded_sequence = tokenizer.decode(gen_seq[0].cpu().numpy().tolist())
+        print("Generated Sequence:", decoded_sequence)
+        print("Actual Sequence:", tokenizer.decode(src[0].cpu().numpy().tolist()))
 
         # Collect all latent vectors
         latent_vectors = []

@@ -1,0 +1,119 @@
+Mon Jan 20 10:53:51 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100 80GB PCIe          On  |   00000000:65:00.0 Off |                   On |
+| N/A   33C    P0             64W /  300W |      88MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    5   0   0  |              25MiB / 19968MiB    | 28      0 |  2   0    1    0    0 |
+|                  |                 0MiB / 32767MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+                               ID                                           Sequence
+0  tr|A0A5P8N3Y8|A0A5P8N3Y8_9POAL  MAPTVMASSATSVAPFQGLKSTASLPVARRSTNGFGNVRTGGRIRC...
+1  tr|A0A5P8U3Q8|A0A5P8U3Q8_9ROSI  MASSILSSAAVASVNSASPAQASMVAPFTGLKSSAGFPITRKNNVD...
+2  tr|A0A5Q0EJT5|A0A5Q0EJT5_9GAMM  MSSFEVGDYQTAQTLETFGFLPKLTQDEVYDQIDYLIAQGWTPAIE...
+3  tr|A0A5Q4E8P1|A0A5Q4E8P1_9CYAN  MWVTTALLAFALRYLMSRWATAALWSGPTLVTTQESEVLAQIEQFL...
+4  tr|A0A5Q4EAI2|A0A5Q4EAI2_9CYAN  MAIRTPAVSPPQQWSSASAVATAQGQGQVLVESGVSLAVGAVVQAD...
+Train size: 2534, Validation size: 317, Test size: 317
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 23799183: <transf_vae_4> in cluster <dcc> Exited
+
+Job <transf_vae_4> was submitted from host <hpclogin1> by user <s233201> in cluster <dcc> at Mon Jan 20 10:53:47 2025
+Job was executed on host(s) <4*n-62-18-12>, in queue <c27666>, as user <s233201> in cluster <dcc> at Mon Jan 20 10:53:49 2025
+</zhome/85/8/203063> was used as the home directory.
+</zhome/85/8/203063/pai_course> was used as the working directory.
+Started at Mon Jan 20 10:53:49 2025
+Terminated at Mon Jan 20 10:54:24 2025
+Results reported at Mon Jan 20 10:54:24 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q c27666 
+### -- set the job Name --
+#BSUB -J transf_vae_4
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 8:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=16GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start --
+##BSUB -B
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o project/out/gpu_%J.out
+#BSUB -e project/out/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+module load cuda/11.6
+
+source pai/bin/activate
+
+python -u project/esm_encode.py 
+
+
+
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   14.95 sec.
+    Max Memory :                                 604 MB
+    Average Memory :                             487.33 MB
+    Total Requested Memory :                     65536.00 MB
+    Delta Memory :                               64932.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                8
+    Run time :                                   105 sec.
+    Turnaround time :                            37 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <project/out/gpu_23799183.err> for stderr output of this job.
+

@@ -1,0 +1,28 @@
+Loaded module: cuda/11.6
+Some weights of EsmModel were not initialized from the model checkpoint at facebook/esm2_t6_8M_UR50D and are newly initialized: ['esm.pooler.dense.bias', 'esm.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+Traceback (most recent call last):
+  File "/zhome/85/8/203063/pai_course/project/esm_encode.py", line 47, in <module>
+    outputs = model_encoder(**inputs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/transformers/models/esm/modeling_esm.py", line 900, in forward
+    embedding_output = self.embeddings(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/transformers/models/esm/modeling_esm.py", line 196, in forward
+    inputs_embeds = self.word_embeddings(input_ids)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)

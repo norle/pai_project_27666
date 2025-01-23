@@ -1,0 +1,37 @@
+Loaded module: cuda/11.6
+/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py:379: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Traceback (most recent call last):
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v6.py", line 260, in <module>
+    output, mu, logvar = model(src, trg_input, src_mask=src_mask, trg_mask=trg_mask)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v6.py", line 203, in forward
+    mu, logvar = self.encode(src, src_mask, src_padding_mask)
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v6.py", line 183, in encode
+    memory = self.encoder(src, src_mask, src_padding_mask)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 511, in forward
+    output = mod(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 904, in forward
+    + self._sa_block(x, src_mask, src_key_padding_mask, is_causal=is_causal)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 918, in _sa_block
+    x = self.self_attn(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/activation.py", line 1368, in forward
+    attn_output, attn_output_weights = F.multi_head_attention_forward(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/functional.py", line 6278, in multi_head_attention_forward
+    attn_output = scaled_dot_product_attention(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 490.00 MiB. GPU 0 has a total capacity of 19.50 GiB of which 340.94 MiB is free. Including non-PyTorch memory, this process has 19.13 GiB memory in use. Of the allocated memory 18.49 GiB is allocated by PyTorch, and 499.21 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

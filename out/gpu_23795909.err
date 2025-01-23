@@ -1,0 +1,23 @@
+Loaded module: cuda/11.6
+/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py:379: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Traceback (most recent call last):
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v6.py", line 260, in <module>
+    output, mu, logvar = model(src, trg_input, src_mask=src_mask, trg_mask=trg_mask)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v6.py", line 205, in forward
+    output = self.decode(z, trg, trg_mask, trg_padding_mask, memory_key_padding_mask)
+  File "/zhome/85/8/203063/pai_course/project/transf_vae_v6.py", line 199, in decode
+    output = self.decoder(trg, memory, trg_mask, None, trg_padding_mask, memory_key_padding_mask)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 599, in forward
+    tgt_is_causal = _detect_is_causal_mask(tgt_mask, tgt_is_causal, seq_len)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/transformer.py", line 1194, in _detect_is_causal_mask
+    make_causal = bool((mask == causal_comparison).all())
+KeyboardInterrupt

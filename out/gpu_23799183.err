@@ -1,0 +1,20 @@
+Loaded module: cuda/11.6
+Some weights of EsmModel were not initialized from the model checkpoint at facebook/esm2_t6_8M_UR50D and are newly initialized: ['esm.pooler.dense.bias', 'esm.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+Traceback (most recent call last):
+  File "/zhome/85/8/203063/pai_course/project/esm_encode.py", line 47, in <module>
+    outputs = model_encoder(**inputs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/transformers/models/esm/modeling_esm.py", line 900, in forward
+    embedding_output = self.embeddings(
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/zhome/85/8/203063/pai_course/pai/lib64/python3.9/site-packages/transformers/models/esm/modeling_esm.py", line 214, in forward
+    embeddings = (embeddings * (1 - mask_ratio_train) / (1 - mask_ratio_observed)[:, None, None]).to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 8.51 GiB. GPU 0 has a total capacity of 19.50 GiB of which 2.06 GiB is free. Including non-PyTorch memory, this process has 17.40 GiB memory in use. Of the allocated memory 17.24 GiB is allocated by PyTorch, and 22.31 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
